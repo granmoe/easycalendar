@@ -56,4 +56,17 @@ app.get('/', function(req, res){
     res.render('index.html');
 });
 
-module.exports = app;
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + server.address().port
+   + '\n http://localhost:3000');
+});
+
+/* ReST API
+    routes
+        /api/events/:event_id
+*/
+app.get('/api', function (req, res) {
+  console.log('API is running');
+});
