@@ -5,22 +5,46 @@
 	border: 0;
 }
 body {
-	padding: 42px;
+	/*padding: 42px;*/
+	padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #00B3FF;
+  background-color: #90A437;
 }
 a {
-  color: #00B7FF;
+  color: #4F6000;
 }
 body > div {
-	float: left;
 	position: fixed;
 }
 #calendar {
+	background-color: #DCE7AA;
+	outline: #4F6000 solid thin;
 	left: 42px;
-	width: 900px;
+	width: 840px;
+}
+#calendar div {
+	/*border: 1px solid #4F6000;*/
+	outline: #4F6000 solid thin;
+	float: left;
+	width: 112px;
+	height: 112px;
+	padding: 4px;
+}
+#calendar p {
+	text-align: center;
+	padding: 8px;
 }
 #controls {
+	background-color: #B5C669;
+	min-height: 500px;
 	width: 400px;
-	left: 942px;
+	left: 928px;
 }
+
+/* color scheme
+main - #90A437
+white - #DCE7AA
+light accent - #B5C669
+medium - #6E8211
+dark - #4F6000
+*/

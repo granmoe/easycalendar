@@ -1,16 +1,27 @@
 require.config({
-  baseUrl:'../',
+  baseUrl:'/js/',
   paths: {
-    jquery: 'libs/jquery/jquery-min',
-    dust: 'libs/dust/dust-min',
-    backbone: 'libs/backbone/backbone-min',
-    text: 'libs/require/text'
+    jquery: 'libs/jquery-min',
+    underscore: 'libs/underscore',
+    backbone: 'libs/backbone',
+    text: 'libs/text',
+    dust: 'libs/dust-min',
+  },
+  shim: {
+    underscore: {
+      exports: "_"
+    },
+    backbone: {
+      deps: ['underscore', 'jquery'],
+      exports: 'Backbone'
+    }
   }
 });
 
-require(['views/calendar', 'collections/events'], 
-	function(CalendarView, EventsCollection){
+require(['jquery','backbone', 'views/app'], 
+	function($, Backbone, AppView){
 	// get initial sample data from file
-  var calendar_view = new CalendarView(); // pass data here as collection
-
+  //var calendar_view = new CalendarView(); // pass data here as collection
+  var appview = new AppView();
+  console.log("Started from main.js by require :)");
 });

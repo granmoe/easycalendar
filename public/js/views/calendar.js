@@ -19,7 +19,7 @@ define([
 
     // bind to existing div from html skeleton
     initialize: this.render();
-    
+
     el: $('#calendar'),
     render: function() {
       this.$el.html('This is a test');
@@ -38,4 +38,6 @@ define([
     //     remaining:  Todos.remaining().length
     //   }));
     // };
+  });
+  return CalendarView;
 });
