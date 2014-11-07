@@ -14,15 +14,16 @@ a {
   color: #4F6000;
 }
 body > div {
-	position: fixed;
+	position: absolute;
 }
 #calendar {
 	background-color: #DCE7AA;
 	outline: #4F6000 solid thin;
 	left: 42px;
 	width: 840px;
+	margin-bottom: 42px;
 }
-#calendar div {
+#calendar ol {
 	/*border: 1px solid #4F6000;*/
 	outline: #4F6000 solid thin;
 	float: left;
@@ -35,6 +36,7 @@ body > div {
 	padding: 8px;
 }
 #controls {
+	padding: 8px;
 	background-color: #B5C669;
 	min-height: 500px;
 	width: 400px;

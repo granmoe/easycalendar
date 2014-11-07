@@ -2,7 +2,6 @@ define(['backbone'], function(Backbone) {
     var AppView = Backbone.View.extend({
         el: '#controls',
         initialize: function() {
-        	this.render();
         },
         render: function() {
         	this.$el.html("From the app view");

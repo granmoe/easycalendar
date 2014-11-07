@@ -5,8 +5,10 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 var app = express();
+var router = express.Router();
 
 // SERVER CONFIGURATION
 // view engine setup...don't need a templating engine on the server-side for this
@@ -16,21 +18,18 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded()); // {extended: true} ?
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('env', 'development');
 
-// app.use('/', routes);
-// app.use('/users', users);
-
+/// error handlers
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-
-/// error handlers
 
 // development error handler
 // will print stacktrace
@@ -64,8 +63,60 @@ var server = app.listen(app.get('port'), function() {
 
 /* ReST API
     routes
-        /api/events/:event_id
-*/
-app.get('/api', function (req, res) {
+        /api/appts/:appt_id
+
+create → POST   /collection
+read → GET   /collection[/id]
+update → PUT   /collection/id
+patch → PATCH   /collection/id
+delete → DELETE   /collection/id */
+
+app.use('/api', router);
+
+// use regex to not respond to any routes except / and /api ???
+
+router.get('/api', function (req, res) {
+  res.json({ message: 'From the api router' });
   console.log('API is running');
 });
+
+var data = 
+{
+    "month": "1",
+    "year": "2015",
+    "events": [
+        {
+            "month": "1",
+            "year": "2015",
+            "id": "3",
+            "title": "Node.js Training - Day 1",
+            "time": "9:00a - 4:00p",
+            "day": "11",
+            "address": "7601 Penn Ave S, Richfield, MN"
+        }
+    ]
+}
+
+// only write out these explicit json keys, can develop a more complex
+// replacer function to also sanitize the values
+var jsonFilter =  
+    ['month', 'year', 'events', 'id', 'title', 'time', 'day', 'address'];
+
+// Read/Write the whole file
+// TODO: CRUD functionality for single event data
+var destFile = 'events_dev.json';
+// fs.writeFile(destFile, JSON.stringify(data, jsonFilter, 4), function(err) {
+//     if(err) {
+//       console.log(err);
+//     } else {
+//       console.log("JSON saved to " + destFile);
+//     }
+// });
+
+// fs.appendFile(destFile, ", \n" + JSON.stringify(data, jsonFilter, 4), function(err) {
+//     if(err) {
+//       console.log(err);
+//     } else {
+//       console.log("JSON appended to " + destFile);
+//     }
+// });

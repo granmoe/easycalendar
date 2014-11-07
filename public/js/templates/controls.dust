@@ -1,0 +1,3 @@
+Inputs:
+	Description, Date, Begin Time, End Time
+	When event element is clicked, details show (controls view can listen to all the #calendar > ol > li elements....may need a view for these)

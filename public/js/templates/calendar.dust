@@ -1,0 +1,9 @@
+{#events}
+  <ol>
+  	{title}, {time}{~n}
+  </ol>
+{:else}
+  <ol>
+  	You have nothing planned!
+  </ol>
+{/events}

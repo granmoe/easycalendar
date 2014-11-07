@@ -1,29 +1,64 @@
 define([
-  'jquery',
+  'dust',
   'backbone',
-  'collections/todos',
-  'views/event',
-  'text!templates/stats.html'
-  ], function($, Dust, Backbone, Todos, TodoView, statsTemplate){
-
-  // initialize basic app config
-  var id_counter = 1;
-  Backbone.sync = function(method, model) {
-    console.log("I've been passed " + method + " with " + JSON.stringify(model));
-    if (method === 'create') {
-      model.set('id', id_counter++);
-    }
-  };
+  'collections/events',
+  'text!templates/calendar.dust',
+  'utilities/datehelper'
+  ], function(dust, Backbone, Events, CalendarTemplate, DateHelper){
 
   var CalendarView = Backbone.View.extend({
-
-    // bind to existing div from html skeleton
-    initialize: this.render();
-
-    el: $('#calendar'),
+    initialize: function(){
+      console.log("CalendarView initialized.");
+      var compiled = dust.compile(CalendarTemplate, "tmpl");
+      dust.loadSource(compiled);
+    },
+//    template: dust.loadSource(CalendarTemplate),
+    el: '#calendar',
     render: function() {
-      this.$el.html('This is a test');
-    }
+      var dustContext = {
+        "events": [
+          {
+              "month": "12",
+              "year": "2014",
+              "id": "1",
+              "title": "Node.js Training - Day 1",
+              "time": "9:00a - 4:00p",
+              "day": "11",
+              "address": "7601 Penn Ave S, Richfield, MN"
+          },
+          {
+              "month": "12",
+              "year": "2014",
+              "id": "2",
+              "title": "Node.js Training - Day 2",
+              "time": "9:00a - 4:00p",
+              "day": "12",
+              "address": "7601 Penn Ave S, Richfield, MN"
+          },
+          {
+              "month": "12",
+              "year": "2014",
+              "id": "3",
+              "title": "Node.js Training - Day 3",
+              "time": "9:00a - 4:00p",
+              "day": "13",
+              "address": "7601 Penn Ave S, Richfield, MN"
+          }
+        ]
+      };
+      var self = this;
+      dust.render("tmpl", dustContext, function(err, out){
+        if (err) {
+          console.log(err);
+        } else {
+          self.$el.html(out);
+        }
+      });
+    } // render
+  });
+  return CalendarView;
+});
+
     // Our template for the line of statistics at the bottom of the app.
     //statsTemplate: Dust.template(statsTemplate),
 
@@ -38,6 +73,3 @@ define([
     //     remaining:  Todos.remaining().length
     //   }));
     // };
-  });
-  return CalendarView;
-});
