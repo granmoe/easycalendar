@@ -1,12 +1,13 @@
 // NEED TO COPY THIS CODE INTO MAIN datehelper.js FILE WHEN DONE!!!!!!!!!!!!!!!
 
-function DateHelper(year,month){
-	// TODO: add validation and test range of dates
-
 	/* Set date by year and month, class will then calculate and store
 			an array of the dates to place in calendar for previous, next
 			and current month [29, 30, 31]
 	*/
+	
+	// TODO: add validation and test range of dates
+
+function DateHelper(year,month){
 	this.setDate(year,month);
 };
 DateHelper.prototype = {
@@ -18,24 +19,22 @@ DateHelper.prototype = {
 		this.nextMonth = new Date(year,month);
 		date = new Date(year,month);
 		monthStartDay = date.getDay();
-		console.log("date object info: \n\n" + this.nextMonth + "\n");
 		mon = date.getMonth();
 		prevMon = mon - 1;
 		nextMon = mon + 1;
 		if (prevMon < 0) {
 			prevMon = 11;
-			this.prevMonth.setYear(date.getYear() - 1);
+			this.prevMonth.setYear(date.getFullYear() - 1);
 		};
 		this.prevMonth.setMonth(prevMon);
 		if (nextMon > 11) {
 			nextMon = 0;
-			this.nextMonth.setYear(date.getYear() + 1);
+			this.nextMonth.setYear(date.getFullYear() + 1);
 		};
 		this.nextMonth.setMonth(nextMon);
-		console.log("prev, curr, next: " + "\n" + this.prevMonth + "\n" + this.currMonth + "\n" + this.nextMonth);
-		currDaysInMo = this.daysInMonth(this.currMonth.getYear(), this.currMonth.getMonth());
-		prevDaysInMo = this.daysInMonth(this.prevMonth.getYear(), this.prevMonth.getMonth());
-		nextDaysInMo = this.daysInMonth(this.nextMonth.getYear(), this.nextMonth.getMonth());
+		currDaysInMo = this.daysInMonth(this.currMonth.getFullYear(), this.currMonth.getMonth());
+		prevDaysInMo = this.daysInMonth(this.prevMonth.getFullYear(), this.prevMonth.getMonth());
+		nextDaysInMo = this.daysInMonth(this.nextMonth.getFullYear(), this.nextMonth.getMonth());
 		var dayOfWeek = this.currMonth.getDay();
 		// build prevDays array
 		days = [];
@@ -50,32 +49,39 @@ DateHelper.prototype = {
 		}
 		this.currDays = days;
 		// build nextDays array
+		days = [];
 		daysLeft = 35 - (this.prevDays.length) - currDaysInMo;
-		console.log("daysLeft: \n" + daysLeft);
-	},
-	daysInMonth:function(year, month) {
-		return new Date(year, month, 0).getDate();
-	},
-	nextMonth:function(){
-		var nextMon = this.currMonth.getMonth() + 1;
-		var nextYear;
-		if (nextMon > 11) {
-			nextMon--;
-			nextYear = this.currMonth.getYear() + 1;
-			this.currMonth.setYear(nextYear);
+		// 31 day months that start on a Sat will need six weeks displayed
+		if (daysLeft < 0) { 
+			daysLeft = 7 + daysLeft;
 		}
-		this.currMonth.setMonth(nextMon);
+		for (i = 1; i <= daysLeft; i++) {
+			days.push(i);
+		}
+		this.nextDays = days;
 	},
-	prevMonth:function(){
-		var prevMon = this.currMonth.getMonth() - 1;
-		var prevYear;
+	daysInMonth:function(year, month) { 
+		// setting to day 0 returns last day of previous month
+		return new Date(year, month + 1, 0).getDate();
+	},
+	setToNextMonth:function(){ // just a convenience method, calls this.setDate
+		var nextMon, nextYear;
+		nextMon = this.currMonth.getMonth() + 1;
+		nextYear = this.currMonth.getFullYear();
+		if (nextMon > 11) {
+			nextMon = 0;
+			nextYear++;
+		}
+		this.setDate(nextYear, nextMon);
+	},
+	setToPrevMonth:function(){ // another convenience method
+		var prevMon, prevYear;
+		prevMon = this.currMonth.getMonth() - 1;
+		prevYear = this.currMonth.getFullYear();
 		if (prevMon < 0) {
 			prevMon = 11;
-			prevYear = this.currMonth.getYear() - 1;
-			this.currMonth.setYear(prevYear);
-		} else {
-			this.currMonth.setMonth(prevMon);		
-			init(this.currMonth);
+			prevYear--;
 		}
+		this.setDate(prevYear, prevMon);
 	}
 };
