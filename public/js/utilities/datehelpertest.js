@@ -1,30 +1,31 @@
-define(function(){
-	function DateHelper(date){
+	function DateHelper(year,month){
+		// date must be a Date object
 		// TODO: add validation and test range of dates
-		this.setDate(date);
+		this.setDate(year,month);
 	}
 	DateHelper.prototype = {
-		currMonth, prevMonth, nextMonth, currDays, prevDays, nextDays, // xDays vars hold array of day nums
 		constructor: DateHelper,
-		setDate:function(currDate){
-			var prevYear, nextYear;
-			var mon = currDate.getMonth();
-			var prevMon = mon - 1;
-			var nextMon = mon + 1;
+		setDate:function(year,month){
+			var date, prevYear, nextYear, mon, prevMon, nextMon;
+			date = new Date(year,month);
+			console.dir("date object info: \n\n" + date);
+			mon = date.getMonth();
+			prevMon = mon - 1;
+			nextMon = mon + 1;
 			if (prevMon < 0) {
 				prevMon = 11;
-				prevYear = currDate.getYear() - 1;
+				prevYear = date.getYear() - 1;
 			}
 			if (nextMon > 11) {
 				nextMon--;
-				nextYear = currDate.getYear() + 1;
+				nextYear = date.getYear() + 1;
 			}
-			this.currMonth = currDate;
-			this.prevMonth = currDate.setMonth(prevMon)
-			this.nextMonth = currDate.setMonth(nextMon)
-			this.currDays = daysInMonth(currDate.getMonth(), currDate.getYear());
-			this.prevDays = daysInMonth(this.prevMonth.getMonth(), this.prevMonth.getYear());
-			this.nextDays = daysInMonth(this.nextMonth.getMonth(), this.nextMonth.getYear());
+			this.currMonth = date;
+			this.prevMonth = date.setMonth(prevMon);
+			this.nextMonth = date.setMonth(nextMon);
+			this.currDays = this.daysInMonth(date.getMonth(), date.getYear());
+			this.prevDays = this.daysInMonth(this.prevMonth.getMonth(), this.prevMonth.getYear());
+			this.nextDays = this.daysInMonth(this.nextMonth.getMonth(), this.nextMonth.getYear());
 		},
 		daysInMonth:function(month, year) {
   		return new Date(year, month, 0).getDate();
@@ -51,5 +52,3 @@ define(function(){
 				init(this.currMonth);
 			}
 	}
-	return DateHelper;
-});

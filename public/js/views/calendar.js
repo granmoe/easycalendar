@@ -7,6 +7,7 @@ define([
   ], function(dust, Backbone, Events, CalendarTemplate, DateHelper){
 
   var CalendarView = Backbone.View.extend({
+    dateHelper,
     initialize: function(){
       var compiled = dust.compile(CalendarTemplate, "tmpl");
       dust.loadSource(compiled);
@@ -17,9 +18,9 @@ define([
     el: '#calendar',
     render: function() {
       var dustContext = { // just a test...
-        'currMonthDays' : this.datehelper.currDays,
-        'prevMonthDays' : this.DateHelper.prevDays,
-        'nextMonthDays' : this.DateHelper.nextDays
+        'currMonthDays' : this.dateHelper.currDays,
+        'prevMonthDays' : this.dateHelper.prevDays,
+        'nextMonthDays' : this.dateHelper.nextDays
       };
       var self = this;
       dust.render("tmpl", dustContext, function(err, out){
