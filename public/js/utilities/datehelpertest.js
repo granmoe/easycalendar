@@ -14,6 +14,7 @@ DateHelper.prototype = {
 	constructor: DateHelper,
 	setDate:function(year, month){
 		var mon, prevMon, nextMon, date, days, daysLeft, currDaysInMo, prevDaysInMo, nextDaysInMo, monthStartDay;
+		var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 		this.prevMonth = new Date(year,month);
 		this.currMonth = new Date(year,month);
 		this.nextMonth = new Date(year,month);
@@ -32,13 +33,17 @@ DateHelper.prototype = {
 			this.nextMonth.setYear(date.getFullYear() + 1);
 		};
 		this.nextMonth.setMonth(nextMon);
+		// store month names
+		this.prevMonthName = monthNames[this.prevMonth.getMonth()];
+		this.currMonthName = monthNames[this.currMonth.getMonth()];
+		this.nextMonthName = monthNames[this.nextMonth.getMonth()];
 		currDaysInMo = this.daysInMonth(this.currMonth.getFullYear(), this.currMonth.getMonth());
 		prevDaysInMo = this.daysInMonth(this.prevMonth.getFullYear(), this.prevMonth.getMonth());
 		nextDaysInMo = this.daysInMonth(this.nextMonth.getFullYear(), this.nextMonth.getMonth());
 		var dayOfWeek = this.currMonth.getDay();
 		// build prevDays array
 		days = [];
-		for (i = 1; i <= dayOfWeek; i++) {
+		for (i = 0; i < dayOfWeek; i++) {
 			days.push(prevDaysInMo - dayOfWeek + i + 1);
 		}
 		this.prevDays = days;

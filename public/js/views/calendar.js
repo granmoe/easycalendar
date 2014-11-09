@@ -7,19 +7,34 @@ define([
   ], function(dust, Backbone, Events, CalendarTemplate, DateHelper){
 
   var CalendarView = Backbone.View.extend({
+    el: '#calendar',
+    events: {
+      'click #prev-btn': 'prevMonth',
+      'click #next-btn': 'nextMonth'
+    },
     initialize: function(){
       var compiled = dust.compile(CalendarTemplate, "tmpl");
       dust.loadSource(compiled);
       // set to today, updated when events collection loaded
       var currentDate = new Date(); 
-      this.datehelper = new DateHelper(currentDate.getYear(),currentDate.getMonth());
+      this.datehelper = new DateHelper(currentDate.getFullYear(),currentDate.getMonth());
     },
-    el: '#calendar',
+    prevMonth: function(){
+      this.datehelper.setToPrevMonth();
+      this.render();
+    },
+    nextMonth: function(){
+      this.datehelper.setToNextMonth();
+      this.render();
+    },
     render: function() {
+      console.dir(this.datehelper);
       var dustContext = {
-        'currMonthDays' : this.dateHelper.currDays,
-        'prevMonthDays' : this.dateHelper.prevDays,
-        'nextMonthDays' : this.dateHelper.nextDays
+        'year': this.datehelper.year,
+        'monthName' : this.datehelper.currMonthName,
+        'currMonthDays' : this.datehelper.currDays,
+        'prevMonthDays' : this.datehelper.prevDays,
+        'nextMonthDays' : this.datehelper.nextDays
       };
       var self = this;
       dust.render("tmpl", dustContext, function(err, out){
@@ -33,3 +48,20 @@ define([
   });
   return CalendarView;
 });
+
+/*    // Generate the attributes for a new Todo item.
+    newAttributes: function() {
+      return {
+        content: this.input.val(),
+        order:   this.collection.nextOrder(),
+        done:    false
+      };
+    },
+
+    // If you hit return in the main input field, create new **Todo** model,
+    // persisting it to *localStorage*.
+    createOnEnter: function(e) {
+      if (e.keyCode != 13) return;
+      this.collection.create(this.newAttributes());
+      this.input.val('');
+    },*/

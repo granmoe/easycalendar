@@ -1,9 +1,20 @@
-<ol>
-	{nextMonthDays}
-</ol>
-<ol>
-	{currMonthDays}
-</ol>
-<ol>
-	{prevMonthDays}
-</ol>
+<div id="header">
+	<button id="prev-btn"><</button>
+	<h1>{monthName} {year}</h1>
+	<button id="next-btn">></button>
+</div>
+{#prevMonthDays}
+	<ol class="prev-month">
+		{.}{~n}
+	</ol>
+{/prevMonthDays}
+{#currMonthDays}
+	<ol class="curr-month">
+		{.}{~n}
+	</ol>
+{/currMonthDays}
+{#nextMonthDays}
+	<ol class="next-month">
+		{.}{~n}
+	</ol>
+{/nextMonthDays}
