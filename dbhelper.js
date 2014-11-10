@@ -33,7 +33,14 @@ DbHelper.prototype = {
                 buffer = buffer.slice(pos+1); // slice the processed data off the buffer
                 // only GET to /api/events passes the app_init flag, all other routes include year and month
                 if (options.app_init) { // return the first month of events in the file
+                    // console.log("monthEvents: \n");
+                    // console.dir(monthEvents);
+                    // console.log("\n")
+                    // console.log("events: \n");
+                    //console.dir(monthEvents['events']);
+                    console.log("\n")
                     callback(monthEvents['events']);
+                    return;
                 } else {
                 // Check month/year of events
                     // code here
@@ -41,7 +48,6 @@ DbHelper.prototype = {
                 }
             }
         });
-        return monthEvents;
         function process(line) {
             if (line[line.length-1] == '\r') line=line.substr(0,line.length-1); // discard CR
             if (line.length > 0) { // ignore empty lines

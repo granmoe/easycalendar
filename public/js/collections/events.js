@@ -6,6 +6,8 @@ define([
 	var EventsCollection = Backbone.Collection.extend({
     model: Event,
     url: '/api/events',
+    month: '',
+    year: '',
   });
   return new EventsCollection();
 });

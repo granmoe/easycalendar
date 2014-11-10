@@ -25,12 +25,13 @@ require(
   ['jquery','backbone', 'dust', 'collections/events', 'views/calendar','views/controls'], 
 	function($, Backbone, dust, EventsCollection, CalendarView, ControlsView){
     // Override Backbone.sync with ReSTful API
-    var id_counter = 1;
+    // var id_counter = 1;
     // Backbone.sync = function(method, model) {
-    //   console.log("I've been passed " + method + " with " + JSON.stringify(model));
-    //   if (method === 'create') {
-    //     model.set('id', id_counter++);
-    //   }
+      
+    //   // console.log("I've been passed " + method + " with " + JSON.stringify(model));
+    //   // if (method === 'create') {
+    //   //   model.set('id', id_counter++);
+    //   // }
     // };
     var calendarView = new CalendarView({collection: EventsCollection});
     var controlsView = new ControlsView();

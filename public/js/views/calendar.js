@@ -17,9 +17,13 @@ define([
       dust.loadSource(compiled);
       // set to today, updated when events collection loaded
       var currentDate = new Date(); 
+      this.listenTo(this.collection, 'fetched', this.createDayViews);
       this.datehelper = new DateHelper(currentDate.getFullYear(),currentDate.getMonth());
-      this.collection.fetch();
-      console.log(JSON.stringify(this.collection));
+      this.collection.fetch({success: function(coll, resp, opts){
+          console.log(JSON.stringify(coll.toJSON()));
+          coll.trigger('fetched');
+        }
+      });
     },
     prevMonth: function(){
       this.datehelper.setToPrevMonth();
@@ -28,6 +32,19 @@ define([
     nextMonth: function(){
       this.datehelper.setToNextMonth();
       this.render();
+    },
+    createDayViews: function() { // collect events for each day
+      var daysThisMo = this.datehelper.currDays.length;
+      var results;
+      console.log("createDayViews \n");
+      console.log(JSON.stringify(this.collection.toJSON()));
+      for (i = 0; i < daysThisMo; i++) {
+        results = this.collection.where({ day: "11" });
+        var dayCollection = new Backbone.Collection(results);
+        console.log("i = " + i);
+        console.log(JSON.stringify(dayCollection.toJSON));
+        // create day view that will attach to the appropriate ol element
+      }
     },
     render: function() {
       var dustContext = {

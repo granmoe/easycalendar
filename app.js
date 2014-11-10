@@ -61,7 +61,7 @@ delete → DELETE   /collection/id */
 
 app.get('/api/events', function (req, res) {
   db.getMonthEvents({app_init: true}, function(data){ // NEED ERROR HANDLING HERE...
-      //console.log("events data: \n");
+      console.log("events data: \n");
       console.dir(data);
       res.json(data);
   });
