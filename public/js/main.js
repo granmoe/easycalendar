@@ -26,17 +26,16 @@ require(
 	function($, Backbone, dust, EventsCollection, CalendarView, ControlsView){
     // Override Backbone.sync with ReSTful API
     var id_counter = 1;
-    Backbone.sync = function(method, model) {
-      console.log("I've been passed " + method + " with " + JSON.stringify(model));
-      if (method === 'create') {
-        model.set('id', id_counter++);
-      }
-    };
-    var calendarView = new CalendarView();
+    // Backbone.sync = function(method, model) {
+    //   console.log("I've been passed " + method + " with " + JSON.stringify(model));
+    //   if (method === 'create') {
+    //     model.set('id', id_counter++);
+    //   }
+    // };
+    var calendarView = new CalendarView({collection: EventsCollection});
     var controlsView = new ControlsView();
     controlsView.render();
     calendarView.render();
-    console.log("Started from main.js by require :)");
 });
 
 // what other dependencies are needed? Calendar and Controls

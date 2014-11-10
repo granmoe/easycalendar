@@ -5,7 +5,9 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var fs = require('fs');
+var fs = require('fs'); // prob won't need this anymore, moved to db_ops.js
+var dbhelper = require('./dbhelper.js');
+var db = new dbhelper('events_dev.json'); // database file
 
 var app = express();
 
@@ -41,7 +43,6 @@ if (app.get('env') === 'development') {
     });
 }
 
-
 /* ReST API
     routes
         /api/appts/:appt_id
@@ -56,10 +57,14 @@ delete → DELETE   /collection/id */
 // need to handle invalid params passed to API
 // GET: '/api/:year/:month'
 
-app.get('/api', function (req, res) {
-  //res.setHeader('Content-Type', 'application/json');
-  res.json({ message: 'From the api router' });
-  console.log('API is running');
+// db.getMonthEvents(options) - options = {year: 2014, month: 12, app_init: false}
+
+app.get('/api/events', function (req, res) {
+  db.getMonthEvents({app_init: true}, function(data){ // NEED ERROR HANDLING HERE...
+      //console.log("events data: \n");
+      console.dir(data);
+      res.json(data);
+  });
 });
 
 // START SERVER
@@ -68,45 +73,3 @@ var server = app.listen(app.get('port'), function() {
    + '\n http://localhost:3000');
 });
 
-// JSON tests:
-
-var data = 
-{
-    "month": "1",
-    "year": "2015",
-    "events": [
-        {
-            "month": "1",
-            "year": "2015",
-            "id": "3",
-            "title": "Node.js Training - Day 1",
-            "time": "9:00a - 4:00p",
-            "day": "11",
-            "address": "7601 Penn Ave S, Richfield, MN"
-        }
-    ]
-}
-
-// only write out these explicit json keys, can develop a more complex
-// replacer function to also sanitize the values
-var jsonFilter =  
-    ['month', 'year', 'events', 'id', 'title', 'time', 'day', 'address'];
-
-// Read/Write the whole file
-// TODO: CRUD functionality for single event data
-var destFile = 'events_dev.json';
-// fs.writeFile(destFile, JSON.stringify(data, jsonFilter, 4), function(err) {
-//     if(err) {
-//       console.log(err);
-//     } else {
-//       console.log("JSON saved to " + destFile);
-//     }
-// });
-
-// fs.appendFile(destFile, ", \n" + JSON.stringify(data, jsonFilter, 4), function(err) {
-//     if(err) {
-//       console.log(err);
-//     } else {
-//       console.log("JSON appended to " + destFile);
-//     }
-// });

@@ -13,11 +13,13 @@ define([
       'click #next-btn': 'nextMonth'
     },
     initialize: function(){
-      var compiled = dust.compile(CalendarTemplate, "tmpl");
+      var compiled = dust.compile(CalendarTemplate, "cal_tmpl");
       dust.loadSource(compiled);
       // set to today, updated when events collection loaded
       var currentDate = new Date(); 
       this.datehelper = new DateHelper(currentDate.getFullYear(),currentDate.getMonth());
+      this.collection.fetch();
+      console.log(JSON.stringify(this.collection));
     },
     prevMonth: function(){
       this.datehelper.setToPrevMonth();
@@ -28,7 +30,6 @@ define([
       this.render();
     },
     render: function() {
-      console.dir(this.datehelper);
       var dustContext = {
         'year': this.datehelper.year,
         'monthName' : this.datehelper.currMonthName,
@@ -37,7 +38,7 @@ define([
         'nextMonthDays' : this.datehelper.nextDays
       };
       var self = this;
-      dust.render("tmpl", dustContext, function(err, out){
+      dust.render("cal_tmpl", dustContext, function(err, out){
         if (err) {
           console.log(err);
         } else {

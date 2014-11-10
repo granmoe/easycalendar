@@ -45,6 +45,9 @@ ol.prev-month, ol.next-month {
 	width: 400px;
 	left: 928px;
 }
+#controls * {
+	display: block;
+}
 
 /* color scheme
 main - #90A437
