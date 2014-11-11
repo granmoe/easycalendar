@@ -5,16 +5,16 @@
 </div>
 {#prevMonthDays}
 	<ol class="prev-month">
-		{.}{~n}
+		<li>{.}{~n}</li>
 	</ol>
 {/prevMonthDays}
 {#currMonthDays}
 	<ol class="curr-month" id="day_{.}">
-		{.}{~n}
+		<li>{.}{~n}</li>
 	</ol>
 {/currMonthDays}
 {#nextMonthDays}
 	<ol class="next-month">
-		{.}{~n}
+		<li>{.}{~n}</li>
 	</ol>
 {/nextMonthDays}

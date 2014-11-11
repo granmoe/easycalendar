@@ -34,9 +34,12 @@ body > div {
 ol.prev-month, ol.next-month {
 	background-color: #D1D6B8; //C4C9A9;
 }
-#calendar p {
-	text-align: center;
-	padding: 8px;
+#calendar ol li {
+	list-style-type: none;
+	font-size: 12px;
+}
+#header button, #header h1 {
+	display: inline;
 }
 #controls {
 	padding: 8px;

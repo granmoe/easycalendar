@@ -22,8 +22,8 @@ require.config({
 });
 
 require(
-  ['jquery','backbone', 'dust', 'collections/events', 'views/calendar','views/controls'], 
-	function($, Backbone, dust, EventsCollection, CalendarView, ControlsView){
+  ['underscore', 'jquery','backbone', 'dust', 'collections/events', 'views/calendar','views/controls'], 
+	function(_, $, Backbone, dust, EventsCollection, CalendarView, ControlsView){
     // Override Backbone.sync with ReSTful API
     // var id_counter = 1;
     // Backbone.sync = function(method, model) {
@@ -36,7 +36,7 @@ require(
     var calendarView = new CalendarView({collection: EventsCollection});
     var controlsView = new ControlsView();
     controlsView.render();
-    calendarView.render();
+    // calendarview has to be rendered in itself
 });
 
 // what other dependencies are needed? Calendar and Controls

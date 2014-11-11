@@ -1,10 +1,15 @@
+// Most of the app logic is here
+// Re-renders and fetches month's events whenever the month is changed
+
 define([
+  'underscore',
   'dust',
   'backbone',
   'collections/events',
   'text!templates/calendar.dust',
-  'utilities/datehelper'
-  ], function(dust, Backbone, Events, CalendarTemplate, DateHelper){
+  'utilities/datehelper',
+  'views/event'
+  ], function(_,dust, Backbone, Events, CalendarTemplate, DateHelper, EventView){
 
   var CalendarView = Backbone.View.extend({
     el: '#calendar',
@@ -17,13 +22,24 @@ define([
       dust.loadSource(compiled);
       // set to today, updated when events collection loaded
       var currentDate = new Date(); 
-      this.listenTo(this.collection, 'fetched', this.createDayViews);
       this.datehelper = new DateHelper(currentDate.getFullYear(),currentDate.getMonth());
-      this.collection.fetch({success: function(coll, resp, opts){
-          console.log(JSON.stringify(coll.toJSON()));
-          coll.trigger('fetched');
-        }
-      });
+      // Events collection passed into constructor in main.js
+      this.listenTo(this.collection, 'fetched', this.createEventViews);
+      // fetch the full month's data when calendar is initially loaded or changed to diff month
+      // only fetch events and render them after calendar has been rendered; 
+      this.render().callFetch(); 
+    },
+    callFetch: function(year,month){
+      if (year && month) {
+      // call fetch for a specific year and month
+      // put some code here
+      } else {
+      // app start or page refreshed
+        this.collection.fetch({success: function(coll, resp, opts){
+            coll.trigger('fetched');
+          }
+        });
+      }
     },
     prevMonth: function(){
       this.datehelper.setToPrevMonth();
@@ -33,18 +49,32 @@ define([
       this.datehelper.setToNextMonth();
       this.render();
     },
-    createDayViews: function() { // collect events for each day
+    createEventViews: function() {
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      // TODO: Make this handle a single model, then it can be used when we create a single event
+      // iterate over the collection and pass in one model at a time on initial fetch
+      // (assume the collection is sorted by day and then time...or do this after fetch)
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      
+    // should only happen after calendar itself renders, put calendar render call in init
       var daysThisMo = this.datehelper.currDays.length;
-      var results;
+      var dayEvents, elem, ev, view;
       console.log("createDayViews \n");
       console.log(JSON.stringify(this.collection.toJSON()));
-      for (i = 0; i < daysThisMo; i++) {
-        results = this.collection.where({ day: "11" });
-        var dayCollection = new Backbone.Collection(results);
-        console.log("i = " + i);
-        console.log(JSON.stringify(dayCollection.toJSON));
-        // create day view that will attach to the appropriate ol element
-      }
+      for (i = 1; i <= daysThisMo; i++) {
+        console.log("i: " + i);
+        dayEvents = this.collection.where({day: i.toString()}); // check for events on each day
+        elem = "#day_" + i;
+        if (dayEvents.length) {
+          for (j = 0; j < dayEvents.length; j++) {
+            console.log("  j: " + j + ", event: ");
+            console.log(dayEvents[j]);
+            ev = dayEvents[j];
+            view = new EventView({model: ev, el: elem});
+            view.render();
+            this.$(elem).append(view.el);
+          }
+        }
+      } // for (i ...
     },
     render: function() {
       var dustContext = {
@@ -62,24 +92,16 @@ define([
           self.$el.html(out);
         }
       });
+      return this; // make chainable so we can call callFetch() after
     }
   });
   return CalendarView;
 });
 
-/*    // Generate the attributes for a new Todo item.
-    newAttributes: function() {
-      return {
-        content: this.input.val(),
-        order:   this.collection.nextOrder(),
-        done:    false
-      };
-    },
-
-    // If you hit return in the main input field, create new **Todo** model,
-    // persisting it to *localStorage*.
-    createOnEnter: function(e) {
-      if (e.keyCode != 13) return;
-      this.collection.create(this.newAttributes());
-      this.input.val('');
-    },*/
+    // // If you hit return in the main input field, create new **Todo** model,
+    // // persisting it to *localStorage*.
+    // createOnEnter: function(e) {
+    //   if (e.keyCode != 13) return;
+    //   this.collection.create(this.newAttributes());
+    //   this.input.val('');
+    // },*/
