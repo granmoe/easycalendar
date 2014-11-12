@@ -1,4 +1,5 @@
-<p>Click or input a day to add an event</p>
+<p>Click an existing event to edit or delete</p>
+<p>Fill in the form to create a new event</p>
 <br>
 <input id="ev-title" placeholder="Description" type="text">
 <br>
@@ -6,8 +7,8 @@
 <br>
 <input id="ev-end-time" placeholder="End Time" type="text">
 <br>
-<input id="ev-address" placeholder="Address" type="text">
+<textarea rows="3" id="ev-address" placeholder="Address" type="text"></textarea>
 <br>
-Inputs:
-	Description, Date, Begin Time, End Time
-	When event element is clicked, details show (controls view can listen to all the #calendar > ol > li elements....may need a view for these)
+<button id="create-event-btn" type="button" class="btn btn-primary">
+	Create Event
+</button>

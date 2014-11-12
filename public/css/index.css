@@ -38,14 +38,17 @@ ol.prev-month, ol.next-month {
 	list-style-type: none;
 	font-size: 12px;
 }
+#calendar ol li:hover {
+	font-weight: bold;
+}
 #header button, #header h1 {
 	display: inline;
 }
 #controls {
 	padding: 8px;
 	background-color: #B5C669;
-	min-height: 500px;
-	width: 400px;
+	min-height: 300px;
+	width: 300px;
 	left: 928px;
 }
 #controls * {

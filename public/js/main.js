@@ -34,7 +34,7 @@ require(
     //   // }
     // };
     var calendarView = new CalendarView({collection: EventsCollection});
-    var controlsView = new ControlsView();
+    var controlsView = new ControlsView({collection: EventsCollection});
     controlsView.render();
     // calendarview has to be rendered in itself
 });

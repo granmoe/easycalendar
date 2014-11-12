@@ -20,19 +20,25 @@ define([
     initialize: function(){
       var compiled = dust.compile(CalendarTemplate, "cal_tmpl");
       dust.loadSource(compiled);
+      
       // set to today, updated when events collection loaded
       var currentDate = new Date(); 
       this.datehelper = new DateHelper(currentDate.getFullYear(),currentDate.getMonth());
+      
       // Events collection passed into constructor in main.js
-      this.listenTo(this.collection, 'fetched', this.createEventViews);
-      // fetch the full month's data when calendar is initially loaded or changed to diff month
-      // only fetch events and render them after calendar has been rendered; 
+      // render calendar first, then check for data in database, 
+      // if data then change to appropriate month and re-render calendar, then create event views
       this.render().callFetch(); 
+      
+      this.listenTo(this.collection, 'fetched', this.setDate);
+      this.listenTo(this.collection, 'add', this.createEventView);
+      // STILL NEED TO SET MONTH AND YEAR IF COLLECTION FETCHED SUCCESSFULLY
     },
+    // fetch the full month's data when calendar is initially loaded or changed to diff month
     callFetch: function(year,month){
       if (year && month) {
       // call fetch for a specific year and month
-      // put some code here
+      //    put some code here
       } else {
       // app start or page refreshed
         this.collection.fetch({success: function(coll, resp, opts){
@@ -49,32 +55,24 @@ define([
       this.datehelper.setToNextMonth();
       this.render();
     },
-    createEventViews: function() {
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      // TODO: Make this handle a single model, then it can be used when we create a single event
-      // iterate over the collection and pass in one model at a time on initial fetch
-      // (assume the collection is sorted by day and then time...or do this after fetch)
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!      
-    // should only happen after calendar itself renders, put calendar render call in init
-      var daysThisMo = this.datehelper.currDays.length;
-      var dayEvents, elem, ev, view;
-      console.log("createDayViews \n");
-      console.log(JSON.stringify(this.collection.toJSON()));
-      for (i = 1; i <= daysThisMo; i++) {
-        console.log("i: " + i);
-        dayEvents = this.collection.where({day: i.toString()}); // check for events on each day
-        elem = "#day_" + i;
-        if (dayEvents.length) {
-          for (j = 0; j < dayEvents.length; j++) {
-            console.log("  j: " + j + ", event: ");
-            console.log(dayEvents[j]);
-            ev = dayEvents[j];
-            view = new EventView({model: ev, el: elem});
-            view.render();
-            this.$(elem).append(view.el);
-          }
-        }
-      } // for (i ...
+    setDate: function() {
+      // update the calendar year/month and re-render
+      var year = this.collection.first().get('year');
+      var month = this.collection.first().get('month') - 1;
+      this.datehelper.setDate(year, month);
+      this.render();
+      var self = this;
+      if (this.collection.length) {  // render any events that are in collection
+        this.collection.each(function(ev) {
+          self.createEventView(ev);
+        });
+      }
+    },
+    createEventView: function(ev) {
+      var elem = "#day_" + ev.get('day');
+      var view = new EventView({model: ev, el: elem});
+      view.render();
+      $(elem).append(view.el);
     },
     render: function() {
       var dustContext = {

@@ -6,11 +6,14 @@ define(['underscore', 'backbone','text!templates/event.dust'],
       initialize: function() {
       	var compiled = dust.compile(DayTemplate, "event_tmpl");
       	dust.loadSource(compiled);
-        _.bindAll(this, 'render');
+        _.bindAll(this, 'render'); // which one of this or the next line ???
+//        this.listenTo(this.model,'change',this.render());
       },
-      // events: { these should get attached to model when view is instantiated from calendarview
-
-      // }
+      events: {  // should these get attached to model when view is instantiated from calendarview??
+        'click' : 'editEvent',
+        'mouseover' : 'showDetails',
+        'mouseout' : 'clearDetails'
+      },
       render: function() {
       	var dustContext = this.model.toJSON();
 	      var self = this;
@@ -20,12 +23,28 @@ define(['underscore', 'backbone','text!templates/event.dust'],
 	        } else {
 	          self.el.innerHTML = out; // this may overwrite content that already exists in the element
                                     // even though we're using append in the parent view
-            console.log("Event self:");
-            console.log(self);
             return self;
 	        }
 	      });
-        //return this; // to make the object chainable
+      },
+      editEvent: function () {
+        console.log("event view edit method")
+        this.$el.addClass('editing');
+      },
+      doneEditing: function () {
+        this.$el.removeClass('editing');
+      },
+      showDetails: function() {
+        $("#ev-title").val(this.model.get('title'));
+        $("#ev-beg-time").val(this.model.get('time'));
+        $("#ev-end-time").val(this.model.get('time'));
+        $("#ev-address").val(this.model.get('address'));
+      },
+      clearDetails: function() {
+        $("#ev-title").val('');
+        $("#ev-beg-time").val('');
+        $("#ev-end-time").val('');
+        $("#ev-address").val('');
       }
   });
   return EventView;

@@ -1,7 +1,13 @@
-<div id="header">
-	<button id="prev-btn"><</button>
-	<h1>{monthName} {year}</h1>
-	<button id="next-btn">></button>
+<div id="header-wrap">
+	<div id="header" class"center-block">
+		<button id="prev-btn" type="button" class="btn btn-primary">
+	    <-
+	  </button>
+		<h1>{monthName} {year}</h1>
+		<button id="next-btn" type="button" class="btn btn-primary">
+	    ->
+	  </button>
+	</div>
 </div>
 {#prevMonthDays}
 	<ol class="prev-month">
