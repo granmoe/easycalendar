@@ -59,6 +59,17 @@ ol.prev-month, ol.next-month {
 	margin-bottom: 6px;
 	display: block;
 }
+.event-edit-dialog {
+	position: fixed;
+	background-color: #B5C669;
+	width: 300px;
+	top: 30%;
+	left: 30%;
+}
+.event-edit-dialog * {
+	display: block;
+	margin-bottom: 2px;
+}
 
 /* color scheme
 main - #90A437

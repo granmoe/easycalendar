@@ -1,20 +1,17 @@
-define(['underscore', 'backbone', 'text!templates/event.dust', 'events_bus'], 
-	function(_, Backbone, EventTemplate, events_bus) {
+define(['underscore', 'backbone', 'text!templates/event.dust', 'views/eventedit', 'events_bus'], 
+	function(_, Backbone, EventTemplate, EventEditView, events_bus) {
   var EventView = Backbone.View.extend({
-      // passed el into constructor in calendar view
-      // el: '#day_' + day number
+      // el passed into constructor in calendar view as '#day_' + day number
       initialize: function() {
       	var compiled = dust.compile(EventTemplate, "event_tmpl");
       	dust.loadSource(compiled);
         this.getTimes();
+        this.listenTo(this.model,'change',this.render());
         this.listenTo(events_bus, 'doneEditing', this.doneEditing); // TODO: ReST API on backend to save changes
         this.listenTo(events_bus, 'deleteEvent', this.deleteEvent);
         this.on('change:time', this.getTimes);
-        _.bindAll(this, 'render'); 
-        // which one of this or the next line ???
-//        this.listenTo(this.model,'change',this.render());
       },
-      events: {  // should these get attached to model when view is instantiated from calendarview??
+      events: {
         'click' : 'editEvent',
         'mouseover' : 'showDetails',
         'mouseout' : 'clearDetails'
@@ -42,18 +39,12 @@ define(['underscore', 'backbone', 'text!templates/event.dust', 'events_bus'],
         this.model.destroy();
       },
       editEvent: function () {
-        console.log("event view edit method")
+        console.log("editevent from event model");
         this.$el.addClass('editing');
-        this.model.toggleEdit();
-        $("#done-editing-btn").removeAttr('disabled');
-        $("#delete-event-btn").removeAttr('disabled');
+        var eventeditview = new EventEditView({ model: this.model });
       },
       doneEditing: function () {
-        console.log("doneEditing event");
         this.$el.removeClass('editing');
-        this.model.toggleEdit();
-        $("#done-editing-btn").attr('disabled', 'disabled');
-        $("#delete-event-btn").attr('disabled', 'disabled');
       },
       showDetails: function() {
         $("#ev-title").val(this.model.get('title'));
@@ -72,5 +63,3 @@ define(['underscore', 'backbone', 'text!templates/event.dust', 'events_bus'],
   });
   return EventView;
 });
-// will need to render the whole day again for each change to an event....
-// could change to single event views, append each event to its appropriate day

@@ -1,5 +1,5 @@
-<p>Click an existing event to edit or delete</p>
 <p>Fill in the form to create a new event</p>
+<!--Prob don't need a template for this since no data is fed into template at any point-->
 <br>
 <label>Description</label>
 <input id="ev-title" type="text">
@@ -20,10 +20,3 @@
 	Create Event
 </button>
 <br>
-<button id="delete-event-btn" type="button" class="btn btn-primary">
-	Delete Event
-</button>
-<br>
-<button id="done-editing-btn" type="button" class="btn btn-primary">
-	Done Editing
-</button>

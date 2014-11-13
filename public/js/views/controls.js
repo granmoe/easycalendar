@@ -1,3 +1,6 @@
+// Inputs and buttons to create/edit/delete and show details of events. 
+// Would be better to create a new view for an event when it is clicked to allow editing/show details, then remove() the view
+
 define(['backbone','text!templates/controls.dust', 'events_bus'], 
 	function(Backbone, ControlsTemplate, events_bus) {
   var ControlsView = Backbone.View.extend({
