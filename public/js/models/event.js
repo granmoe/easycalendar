@@ -3,6 +3,9 @@ define([
   ], function(Backbone){
 
 	var EventModel = Backbone.Model.extend({
+		initialize: function() {
+			this.editing = false;
+		},
 		defaults: {
 			id: '',
 			month: '',
@@ -11,6 +14,9 @@ define([
 			time: '',
 			day: '',
 			address: ''
+		},
+		toggleEdit: function() {
+			this.editing = !this.editing;
 		}
   });
   return EventModel;

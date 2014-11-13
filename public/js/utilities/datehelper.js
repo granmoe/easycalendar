@@ -18,6 +18,7 @@ define(function(){
 			this.prevMonth = new Date(year,month);
 			this.currMonth = new Date(year,month);
 			this.nextMonth = new Date(year,month);
+			this.month = this.currMonth.getMonth();
 			this.year = this.currMonth.getFullYear();
 			date = new Date(year,month);
 			monthStartDay = date.getDay();

@@ -1,14 +1,29 @@
 <p>Click an existing event to edit or delete</p>
 <p>Fill in the form to create a new event</p>
 <br>
-<input id="ev-title" placeholder="Description" type="text">
+<label>Description</label>
+<input id="ev-title" type="text">
 <br>
-<input id="ev-beg-time" placeholder="Start Time" type="text">
+<label>Day</label>
+<input id="ev-day" type="text">
 <br>
-<input id="ev-end-time" placeholder="End Time" type="text">
+<label>Start Time</label>
+<input id="ev-beg-time" type="text">
 <br>
-<textarea rows="3" id="ev-address" placeholder="Address" type="text"></textarea>
+<label>End Time</label>
+<input id="ev-end-time" type="text">
+<br>
+<label>Address</label>
+<textarea rows="3" id="ev-address" type="text"></textarea>
 <br>
 <button id="create-event-btn" type="button" class="btn btn-primary">
 	Create Event
+</button>
+<br>
+<button id="delete-event-btn" type="button" class="btn btn-primary">
+	Delete Event
+</button>
+<br>
+<button id="done-editing-btn" type="button" class="btn btn-primary">
+	Done Editing
 </button>

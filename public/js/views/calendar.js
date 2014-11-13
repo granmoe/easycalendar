@@ -30,30 +30,32 @@ define([
       // if data then change to appropriate month and re-render calendar, then create event views
       this.render().callFetch(); 
       
-      this.listenTo(this.collection, 'fetched', this.setDate);
+      this.listenTo(this.collection, 'firstFetch', this.setDate);
       this.listenTo(this.collection, 'add', this.createEventView);
       // STILL NEED TO SET MONTH AND YEAR IF COLLECTION FETCHED SUCCESSFULLY
     },
     // fetch the full month's data when calendar is initially loaded or changed to diff month
     callFetch: function(year,month){
       if (year && month) {
-      // call fetch for a specific year and month
-      //    put some code here
+        // this.collection.fetch({success: function(coll, resp, opts){
+        //     coll.trigger('fetch');
+        //   }
+        // });
       } else {
       // app start or page refreshed
         this.collection.fetch({success: function(coll, resp, opts){
-            coll.trigger('fetched');
+            coll.trigger('firstFetch');
           }
         });
       }
     },
     prevMonth: function(){
       this.datehelper.setToPrevMonth();
-      this.render();
+      this.render(); //.callFetch(this.datehelper.year, this.datehelper.month);
     },
     nextMonth: function(){
       this.datehelper.setToNextMonth();
-      this.render();
+      this.render(); //.callFetch(this.datehelper.year, this.datehelper.month);
     },
     setDate: function() {
       // update the calendar year/month and re-render

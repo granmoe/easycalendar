@@ -41,6 +41,10 @@ ol.prev-month, ol.next-month {
 #calendar ol li:hover {
 	font-weight: bold;
 }
+.editing {
+	color: red;
+	font-weight: bold;
+}
 #header button, #header h1 {
 	display: inline;
 }
@@ -52,6 +56,7 @@ ol.prev-month, ol.next-month {
 	left: 928px;
 }
 #controls * {
+	margin-bottom: 6px;
 	display: block;
 }
 

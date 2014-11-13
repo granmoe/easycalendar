@@ -1,12 +1,17 @@
-define(['underscore', 'backbone','text!templates/event.dust'], 
-	function(_, Backbone,DayTemplate) {
+define(['underscore', 'backbone', 'text!templates/event.dust', 'events_bus'], 
+	function(_, Backbone, EventTemplate, events_bus) {
   var EventView = Backbone.View.extend({
       // passed el into constructor in calendar view
       // el: '#day_' + day number
       initialize: function() {
-      	var compiled = dust.compile(DayTemplate, "event_tmpl");
+      	var compiled = dust.compile(EventTemplate, "event_tmpl");
       	dust.loadSource(compiled);
-        _.bindAll(this, 'render'); // which one of this or the next line ???
+        this.getTimes();
+        this.listenTo(events_bus, 'doneEditing', this.doneEditing); // TODO: ReST API on backend to save changes
+        this.listenTo(events_bus, 'deleteEvent', this.deleteEvent);
+        this.on('change:time', this.getTimes);
+        _.bindAll(this, 'render'); 
+        // which one of this or the next line ???
 //        this.listenTo(this.model,'change',this.render());
       },
       events: {  // should these get attached to model when view is instantiated from calendarview??
@@ -27,21 +32,39 @@ define(['underscore', 'backbone','text!templates/event.dust'],
 	        }
 	      });
       },
+      getTimes: function() {
+        if (!this.model.get('time')) return; // undefined or ''
+        var parts = this.model.get('time').split('-');
+        this.begTime = parts[0];
+        this.endTime = parts[1];
+      },
+      deleteEvent: function() {
+        this.model.destroy();
+      },
       editEvent: function () {
         console.log("event view edit method")
         this.$el.addClass('editing');
+        this.model.toggleEdit();
+        $("#done-editing-btn").removeAttr('disabled');
+        $("#delete-event-btn").removeAttr('disabled');
       },
       doneEditing: function () {
+        console.log("doneEditing event");
         this.$el.removeClass('editing');
+        this.model.toggleEdit();
+        $("#done-editing-btn").attr('disabled', 'disabled');
+        $("#delete-event-btn").attr('disabled', 'disabled');
       },
       showDetails: function() {
         $("#ev-title").val(this.model.get('title'));
-        $("#ev-beg-time").val(this.model.get('time'));
-        $("#ev-end-time").val(this.model.get('time'));
+        $("#ev-day").val(this.model.get('day'));
+        $("#ev-beg-time").val(this.begTime);
+        $("#ev-end-time").val(this.endTime);
         $("#ev-address").val(this.model.get('address'));
       },
       clearDetails: function() {
         $("#ev-title").val('');
+        $("#ev-day").val('');
         $("#ev-beg-time").val('');
         $("#ev-end-time").val('');
         $("#ev-address").val('');
