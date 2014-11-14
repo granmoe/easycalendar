@@ -8,8 +8,9 @@ define([
   'collections/events',
   'text!templates/calendar.dust',
   'utilities/datehelper',
-  'views/event'
-  ], function(_,dust, Backbone, Events, CalendarTemplate, DateHelper, EventView){
+  'views/event',
+  'events_bus'
+  ], function(_,dust, Backbone, Events, CalendarTemplate, DateHelper, EventView,events_bus){
 
   var CalendarView = Backbone.View.extend({
     el: '#calendar',
@@ -30,17 +31,20 @@ define([
       // if data then change to appropriate month and re-render calendar, then create event views
       this.render().callFetch(); 
       
+      // re-render based on initial data fetched since month/year must be dependent on this per project specs
       this.listenTo(this.collection, 'firstFetch', this.setDate);
+      this.listenTo(events_bus, 'test', this.test);
       this.listenTo(this.collection, 'add', this.createEventView);
-      // STILL NEED TO SET MONTH AND YEAR IF COLLECTION FETCHED SUCCESSFULLY
     },
+
+    test: function() {
+      console.log("TESTETSTETESTESTESTESTET");
+    },
+
     // fetch the full month's data when calendar is initially loaded or changed to diff month
     callFetch: function(year,month){
       if (year && month) {
-        // this.collection.fetch({success: function(coll, resp, opts){
-        //     coll.trigger('fetch');
-        //   }
-        // });
+      // code to get data for specific months
       } else {
       // app start or page refreshed
         this.collection.fetch({success: function(coll, resp, opts){
@@ -72,9 +76,10 @@ define([
     },
     createEventView: function(ev) {
       var elem = "#day_" + ev.get('day');
-      var view = new EventView({model: ev, el: elem});
+      console.log("elem: " + elem);
+      var view = new EventView({model: ev});
       view.render();
-      $(elem).append(view.el);
+      $(elem).append(view.el); // why does this remove other content in the elem? Look at Backbone source
     },
     render: function() {
       var dustContext = {
@@ -97,11 +102,3 @@ define([
   });
   return CalendarView;
 });
-
-    // // If you hit return in the main input field, create new **Todo** model,
-    // // persisting it to *localStorage*.
-    // createOnEnter: function(e) {
-    //   if (e.keyCode != 13) return;
-    //   this.collection.create(this.newAttributes());
-    //   this.input.val('');
-    // },*/

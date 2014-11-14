@@ -1,23 +1,27 @@
 <br>
 <label>Description</label>
-<input id="ev-edit-edit--title" type="text">
+<input id="ev-edit-title" type="text" value="{title}"">
 <br>
 <label>Day</label>
-<input id="ev-edit-day" type="text">
+<input id="ev-edit-day" type="text" value={day}>
 <br>
 <label>Start Time</label>
-<input id="ev-edit-beg-time" type="text">
+<input id="ev-edit-beg-time" type="text" value={begtime}>
 <br>
 <label>End Time</label>
-<input id="ev-edit-end-time" type="text">
+<input id="ev-edit-end-time" type="text" value={endtime}>
 <br>
 <label>Address</label>
-<textarea rows="3" id="ev-edit-address" type="text"></textarea>
+<textarea rows="3" id="ev-edit-address" type="text">{address}</textarea>
 <br>
 <button id="delete-event-btn" type="button" class="btn btn-primary">
 	Delete Event
 </button>
 <br>
+<button id="save-changes-btn" type="button" class="btn btn-primary">
+	Save
+</button>
+<br>
 <button id="done-editing-btn" type="button" class="btn btn-primary">
-	Done edit-ing
+	Close
 </button>

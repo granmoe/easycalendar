@@ -31,6 +31,15 @@ body > div {
 	height: 112px;
 	padding: 4px;
 }
+#header-day-names div {
+	/*border: 1px solid #4F6000;*/
+	outline: #4F6000 solid thin;
+	float: left;
+	width: 112px;
+	height: 24px;
+	padding: 4px;
+	text-align: center;
+}
 ol.prev-month, ol.next-month {
 	background-color: #D1D6B8; //C4C9A9;
 }
@@ -59,14 +68,14 @@ ol.prev-month, ol.next-month {
 	margin-bottom: 6px;
 	display: block;
 }
-.event-edit-dialog {
+#event-edit-dialog {
 	position: fixed;
 	background-color: #B5C669;
 	width: 300px;
 	top: 30%;
 	left: 30%;
 }
-.event-edit-dialog * {
+#event-edit-dialog * {
 	display: block;
 	margin-bottom: 2px;
 }

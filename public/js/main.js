@@ -24,17 +24,17 @@ require.config({
 require(
   ['underscore', 'jquery','backbone', 'dust', 'collections/events', 'views/calendar','views/controls','events_bus'], 
 	function(_, $, Backbone, dust, EventsCollection, CalendarView, ControlsView, Events_Bus){
-    // the events bus is a shared object that different views can trigger events on and listen to
+    // the events bus is a shared object to pass events between views
 
-    // Override Backbone.sync with ReSTful API
-    // var id_counter = 1;
-    // Backbone.sync = function(method, model) {
-      
-    //   // console.log("I've been passed " + method + " with " + JSON.stringify(model));
-    //   // if (method === 'create') {
-    //   //   model.set('id', id_counter++);
-    //   // }
-    // };
+    // Override Backbone.sync with ReSTful API to load initial data, remaining methods could be written on server side
+    Backbone.origSync = Backbone.sync;
+    Backbone.customSync = function(method, model, option) {
+        // Fallback for old sync method
+        if (method == 'read') return Backbone.origSync(method, model, option);
+       //console.log(method + ' method called for model: "' + JSON.stringify(model) + '"');
+    }
+    Backbone.sync = Backbone.customSync;
+
     // init the views
     var calendarView = new CalendarView({collection: EventsCollection});
     var controlsView = new ControlsView({collection: EventsCollection});

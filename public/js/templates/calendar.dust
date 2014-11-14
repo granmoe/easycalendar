@@ -8,6 +8,15 @@
 	    ->
 	  </button>
 	</div>
+	<div id="header-day-names">
+		<div>Sun</div>
+		<div>Mon</div>
+		<div>Tue</div>
+		<div>Wed</div>
+		<div>Thur</div>
+		<div>Fru</div>
+		<div>Sat</div>
+	</div>
 </div>
 {#prevMonthDays}
 	<ol class="prev-month">

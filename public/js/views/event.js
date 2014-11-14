@@ -2,19 +2,24 @@ define(['underscore', 'backbone', 'text!templates/event.dust', 'views/eventedit'
 	function(_, Backbone, EventTemplate, EventEditView, events_bus) {
   var EventView = Backbone.View.extend({
       // el passed into constructor in calendar view as '#day_' + day number
+      tagName: 'li',
       initialize: function() {
       	var compiled = dust.compile(EventTemplate, "event_tmpl");
       	dust.loadSource(compiled);
         this.getTimes();
-        this.listenTo(this.model,'change',this.render());
-        this.listenTo(events_bus, 'doneEditing', this.doneEditing); // TODO: ReST API on backend to save changes
-        this.listenTo(events_bus, 'deleteEvent', this.deleteEvent);
+        this.listenTo(this.model,'change',this.render);
+        this.listenTo(this.model,'destroy',this.remove); // override
+        this.listenTo(events_bus, 'doneEditing', this.doneEditing);
         this.on('change:time', this.getTimes);
       },
       events: {
         'click' : 'editEvent',
         'mouseover' : 'showDetails',
         'mouseout' : 'clearDetails'
+      },
+      remove: function() {
+        this.$el.empty();
+        this.undelegateEvents(); // otherwise the controlsview still listens to this el
       },
       render: function() {
       	var dustContext = this.model.toJSON();
@@ -39,7 +44,6 @@ define(['underscore', 'backbone', 'text!templates/event.dust', 'views/eventedit'
         this.model.destroy();
       },
       editEvent: function () {
-        console.log("editevent from event model");
         this.$el.addClass('editing');
         var eventeditview = new EventEditView({ model: this.model });
       },
@@ -47,6 +51,7 @@ define(['underscore', 'backbone', 'text!templates/event.dust', 'views/eventedit'
         this.$el.removeClass('editing');
       },
       showDetails: function() {
+        $("#create-event-btn").prop('disabled', true);
         $("#ev-title").val(this.model.get('title'));
         $("#ev-day").val(this.model.get('day'));
         $("#ev-beg-time").val(this.begTime);
@@ -54,6 +59,7 @@ define(['underscore', 'backbone', 'text!templates/event.dust', 'views/eventedit'
         $("#ev-address").val(this.model.get('address'));
       },
       clearDetails: function() {
+        $("#create-event-btn").prop('disabled', false);
         $("#ev-title").val('');
         $("#ev-day").val('');
         $("#ev-beg-time").val('');
