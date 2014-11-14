@@ -3,6 +3,7 @@ define(['underscore', 'backbone', 'text!templates/event.dust', 'views/eventedit'
   var EventView = Backbone.View.extend({
       // el passed into constructor in calendar view as '#day_' + day number
       tagName: 'li',
+      className: 'calendar-event',
       initialize: function() {
       	var compiled = dust.compile(EventTemplate, "event_tmpl");
       	dust.loadSource(compiled);

@@ -1,1 +1,1 @@
-<li> {time}, {title} </li>
+{time}, {title}

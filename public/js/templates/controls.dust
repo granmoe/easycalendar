@@ -1,5 +1,4 @@
-<p>Fill in the form to create a new event</p>
-<!--Prob don't need a template for this since no data is fed into template at any point-->
+<!--Prob don't need a template for this since no elements dynamically created here-->
 <br>
 <label>Description</label>
 <input id="ev-title" type="text">
@@ -20,3 +19,5 @@
 	Create Event
 </button>
 <br>
+<p>(Fill in the form to create a new event,</p>
+<p>click an event to edit or delete)</p>

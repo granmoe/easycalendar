@@ -1,3 +1,8 @@
+/* TODO: 
+change a lot of this stuff to use bootstrap approach 
+overflow in ol
+*/
+
 * {
 	padding: 0;
 	margin: 0;
@@ -5,7 +10,6 @@
 	border: 0;
 }
 body {
-	/*padding: 42px;*/
 	padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #90A437;
@@ -13,7 +17,7 @@ body {
 a {
   color: #4F6000;
 }
-body > div {
+body > div { 
 	position: absolute;
 }
 #calendar {
@@ -23,36 +27,26 @@ body > div {
 	width: 840px;
 	margin-bottom: 42px;
 }
-#calendar ol {
-	/*border: 1px solid #4F6000;*/
-	outline: #4F6000 solid thin;
-	float: left;
-	width: 112px;
-	height: 112px;
-	padding: 4px;
+.col-md-1 {
+	width: 14.2857142857%;
+	height: 90px;
 }
-#header-day-names div {
-	/*border: 1px solid #4F6000;*/
-	outline: #4F6000 solid thin;
-	float: left;
-	width: 112px;
-	height: 24px;
-	padding: 4px;
+#header-day-names .col-md-1 {
+	height: 40px;
 	text-align: center;
 }
-ol.prev-month, ol.next-month {
-	background-color: #D1D6B8; //C4C9A9;
+#calendar ol {
+	//overflow: scroll;
 }
 #calendar ol li {
 	list-style-type: none;
 	font-size: 12px;
 }
-#calendar ol li:hover {
-	font-weight: bold;
+.calendar-event:hover {
+	color: blue; /* plain color names are lame */
 }
 .editing {
 	color: red;
-	font-weight: bold;
 }
 #header button, #header h1 {
 	display: inline;
@@ -72,18 +66,9 @@ ol.prev-month, ol.next-month {
 	position: fixed;
 	background-color: #B5C669;
 	width: 300px;
-	top: 30%;
-	left: 30%;
+	left: 928px;
 }
 #event-edit-dialog * {
 	display: block;
 	margin-bottom: 2px;
 }
-
-/* color scheme
-main - #90A437
-white - #DCE7AA
-light accent - #B5C669
-medium - #6E8211
-dark - #4F6000
-*/

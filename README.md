@@ -34,7 +34,7 @@
     <meta name="selected-link" value="repo_source" data-pjax-transient>
       <meta name="google-analytics" content="UA-3769691-2">
 
-    <meta content="collector.githubapp.com" name="octolytics-host" /><meta content="collector-cdn.github.com" name="octolytics-script-host" /><meta content="github" name="octolytics-app-id" /><meta content="4229D35A:6BAA:181273D0:54656F59" name="octolytics-dimension-request_id" /><meta content="5620706" name="octolytics-actor-id" /><meta content="granmoe" name="octolytics-actor-login" /><meta content="6ebb025bb897cc5c5fe2a9fb8db727dfc047df957d934d34ded3e0dfdee47c4f" name="octolytics-actor-hash" />
+    <meta content="collector.githubapp.com" name="octolytics-host" /><meta content="collector-cdn.github.com" name="octolytics-script-host" /><meta content="github" name="octolytics-app-id" /><meta content="4229D35A:5F98:BE61ED3:54657A81" name="octolytics-dimension-request_id" /><meta content="5620706" name="octolytics-actor-id" /><meta content="granmoe" name="octolytics-actor-login" /><meta content="6ebb025bb897cc5c5fe2a9fb8db727dfc047df957d934d34ded3e0dfdee47c4f" name="octolytics-actor-hash" />
     
     <meta content="Rails, view, blob#show" name="analytics-event" />
 
@@ -44,7 +44,7 @@
 
 
     <meta content="authenticity_token" name="csrf-param" />
-<meta content="vDQjF/cX6Zd32A+kClkLWnizMQ6MJ9sACw9ILoXpRhCuySftr1a1/3VW+9GxHgBpmlY2MUVTEQq0CBm7A4OicA==" name="csrf-token" />
+<meta content="XAjtE0AmPvzU6kC1YggwwpIgwNfdBWgNl+QY3ZJVufksIHMEKHCFWfQrqLA0o0sxq6v/lHmi3cQzdReSnBGxTw==" name="csrf-token" />
 
     <link href="https://assets-cdn.github.com/assets/github-1a2396c5eb371559f3a159e677a975bf1ac09b0d78f822f66a7b9158abaa8607.css" media="all" rel="stylesheet" type="text/css" />
     <link href="https://assets-cdn.github.com/assets/github2-9aa4b930049b7014e979a1c83b9ddb77734842a06479f13feec157a03bd25b76.css" media="all" rel="stylesheet" type="text/css" />
@@ -167,7 +167,7 @@
   </li>
 
   <li class="header-nav-item">
-    <form accept-charset="UTF-8" action="/logout" class="logout-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="U8n7dY0rZ/hA+92PnICywqapF0umhgdQDaL9H6IS6+XmQmPg5X3TLiy6+ky1PAzxaZINiF3/nXXADNjQRgUVfw==" /></div>
+    <form accept-charset="UTF-8" action="/logout" class="logout-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="u7TaKBEGjrf8ZxdKIyw8w5lDpOAkBz54y8vepzU/gtDBPAxubc4hWwSXSol+8ksIAuKb6Y/DB07sQb/n1iRHpw==" /></div>
       <button class="header-nav-link sign-out-button tooltipped tooltipped-s" aria-label="Sign out" data-ga-click="Header, sign out, icon:logout">
         <span class="octicon octicon-sign-out"></span>
       </button>
@@ -196,7 +196,7 @@
 <ul class="pagehead-actions">
 
     <li class="subscription">
-      <form accept-charset="UTF-8" action="/notifications/subscribe" class="js-social-container" data-autosubmit="true" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="YvN/OlYHCWaw07cTtUvjy1SHnCHHPD6EN58ogPYIi/OXO9qYiJ6IEkYHB2tYa9WhE9EnsS/27+jOLFuW8UfKLg==" /></div>  <input id="repository_id" name="repository_id" type="hidden" value="26196206" />
+      <form accept-charset="UTF-8" action="/notifications/subscribe" class="js-social-container" data-autosubmit="true" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="kxvY/3Y85rLKSinoiG4VvkF4eAM+W4lxf2O3Mfl8ozSlBI6YQspER4vU8LrOMyqrZUO7ApWAclmHV1TOuVMuVA==" /></div>  <input id="repository_id" name="repository_id" type="hidden" value="26196206" />
 
     <div class="select-menu js-menu-container js-select-menu">
       <a class="social-count js-social-count" href="/granmoe/easycalendar/watchers">
@@ -271,7 +271,7 @@
     
   <div class="js-toggler-container js-social-container starring-container ">
 
-    <form accept-charset="UTF-8" action="/granmoe/easycalendar/unstar" class="js-toggler-form starred js-unstar-button" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="Kw2q/tjKFfY+6J2C7/tWbpDMkCbl/eGsYXjeNpdz/egulUCVFVAInHxr31imf2wv3cy2uhDG0SRMUdTtJSCM5w==" /></div>
+    <form accept-charset="UTF-8" action="/granmoe/easycalendar/unstar" class="js-toggler-form starred js-unstar-button" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="EcE+ZsrYVHMO1Qu51/fQDIrHV3jwzDObY9ER49apfCCshoHuGDp8IPvW5tkUE5y1BUXn+9UX08e4t0N/BqeC8Q==" /></div>
       <button
         class="minibutton with-count js-toggler-target star-button"
         aria-label="Unstar this repository" title="Unstar granmoe/easycalendar">
@@ -282,7 +282,7 @@
           0
         </a>
 </form>
-    <form accept-charset="UTF-8" action="/granmoe/easycalendar/star" class="js-toggler-form unstarred js-star-button" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="Hgk5vU1/x9CZfQ6Jc8j30GOKxENIrAnVG4gewW4XMXIzjK3AavhRWuyTbmPs3AFlAiTFP8lRiaKxMxuLRuQWmA==" /></div>
+    <form accept-charset="UTF-8" action="/granmoe/easycalendar/star" class="js-toggler-form unstarred js-star-button" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="Mfiz4QAAxUD00wBWe5Y94/50xEXsKqH2gynssa6MIiVh5hikrYoM1DJq35mbQq7pw90A902M1PL2SV86aZcoDw==" /></div>
       <button
         class="minibutton with-count js-toggler-target star-button"
         aria-label="Star this repository" title="Star granmoe/easycalendar">
@@ -454,7 +454,7 @@
         <div id="js-repo-pjax-container" class="repository-content context-loader-container" data-pjax-container>
           
 
-<a href="/granmoe/easycalendar/blob/505c6e6990e385cb53739e63b42173bd79601ad4/README.md" class="hidden js-permalink-shortcut" data-hotkey="y">Permalink</a>
+<a href="/granmoe/easycalendar/blob/82c44a28da968f12cc106ba9e790161fa9c7606c/README.md" class="hidden js-permalink-shortcut" data-hotkey="y">Permalink</a>
 
 <!-- blob contrib key: blob_contributors:v21:44eb72928a1c3fd63be17ff606c2234a -->
 
@@ -511,7 +511,7 @@
             </div> <!-- /.select-menu-item -->
         </div>
 
-          <form accept-charset="UTF-8" action="/granmoe/easycalendar/branches" class="js-create-branch select-menu-item select-menu-new-item-form js-navigation-item js-new-item-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="HRMw0e85fCK8xMIWrHSHKlYjJXPSMgNVKgOjTDvfcgtCg4c/gDo0OqUeT84PpUnwTHDI7pxC7d1miRm5esm2zA==" /></div>
+          <form accept-charset="UTF-8" action="/granmoe/easycalendar/branches" class="js-create-branch select-menu-item select-menu-new-item-form js-navigation-item js-new-item-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="V9MUj+Yeux1TfKuUUlmRxI4Dg46LH5EK52ljXrpGfbkeQzB264FShyWfqpkKg3TXYS3aeZgNkc0eTmraxLWYOQ==" /></div>
             <span class="octicon octicon-git-branch select-menu-item-icon"></span>
             <div class="select-menu-item-text">
               <h4>Create branch: <span class="js-new-item-name"></span></h4>
@@ -681,7 +681,7 @@ Be nice, I have a lot of work left to go on this ;-)</p>
     </a>
 
     <ul class="site-footer-links">
-      <li>&copy; 2014 <span title="0.04184s from github-fe139-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+      <li>&copy; 2014 <span title="0.04404s from github-fe123-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
         <li><a href="/site/terms">Terms</a></li>
         <li><a href="/site/privacy">Privacy</a></li>
         <li><a href="/security">Security</a></li>

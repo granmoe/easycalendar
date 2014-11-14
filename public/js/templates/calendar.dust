@@ -1,35 +1,41 @@
 <div id="header-wrap">
 	<div id="header" class"center-block">
 		<button id="prev-btn" type="button" class="btn btn-primary">
-	    <-
+	    <
 	  </button>
 		<h1>{monthName} {year}</h1>
 		<button id="next-btn" type="button" class="btn btn-primary">
-	    ->
+	    >
 	  </button>
 	</div>
 	<div id="header-day-names">
-		<div>Sun</div>
-		<div>Mon</div>
-		<div>Tue</div>
-		<div>Wed</div>
-		<div>Thur</div>
-		<div>Fru</div>
-		<div>Sat</div>
+		<div class="col-md-1">Sun</div>
+		<div class="col-md-1">Mon</div>
+		<div class="col-md-1">Tue</div>
+		<div class="col-md-1">Wed</div>
+		<div class="col-md-1">Thur</div>
+		<div class="col-md-1">Fru</div>
+		<div class="col-md-1">Sat</div>
 	</div>
 </div>
 {#prevMonthDays}
-	<ol class="prev-month">
-		<li>{.}{~n}</li>
-	</ol>
+	<div class="col-md-1">
+		<ol class="prev-month">
+			<li>{.}{~n}</li>
+		</ol>
+	</div>
 {/prevMonthDays}
 {#currMonthDays}
-	<ol class="curr-month" id="day_{.}">
-		<li>{.}{~n}</li>
-	</ol>
+	<div class="col-md-1">
+		<ol class="curr-month" id="day_{.}">
+			<li>{.}{~n}</li>
+		</ol>
+	</div>
 {/currMonthDays}
 {#nextMonthDays}
-	<ol class="next-month">
-		<li>{.}{~n}</li>
-	</ol>
+	<div class="col-md-1">
+		<ol class="next-month">
+			<li>{.}{~n}</li>
+		</ol>
+	</div>
 {/nextMonthDays}
