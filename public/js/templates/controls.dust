@@ -1,4 +1,3 @@
-<!--Prob don't need a template for this since no elements dynamically created here-->
 <br>
 <label>Description</label>
 <input id="ev-title" type="text">

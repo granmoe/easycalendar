@@ -2,10 +2,10 @@ define(function(){
 
 	/* Set date by year and month, class will then calculate and store
 			an array of the dates to place in calendar for previous, next
-			and current month [29, 30, 31]
+			and current month [29, 30, 31], also stores month and year
 	*/
 	
-	// TODO: add validation and test for limit of args
+	// TODO: add validation and test for limit of args, fix non-leap-year february that starts on sunday shows five weeks
 
 	function DateHelper(year,month){
 		this.setDate(year,month);

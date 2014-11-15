@@ -29,9 +29,8 @@ require(
     // Override Backbone.sync with ReSTful API to load initial data, remaining methods could be written on server side
     Backbone.origSync = Backbone.sync;
     Backbone.customSync = function(method, model, option) {
-        // Fallback for old sync method
         if (method == 'read') return Backbone.origSync(method, model, option);
-       //console.log(method + ' method called for model: "' + JSON.stringify(model) + '"');
+        console.log(method + ' method called for model: "' + JSON.stringify(model) + '"');
     }
     Backbone.sync = Backbone.customSync;
 

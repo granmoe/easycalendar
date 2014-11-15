@@ -1,8 +1,7 @@
-// Inputs and buttons to create/edit/delete and show details of events. 
-// Would be better to create a new view for an event when it is clicked to allow editing/show details, then remove() the view
+// TODO: Validation. time/day should be strict
 
-define(['backbone','text!templates/controls.dust', 'events_bus', 'models/event'], 
-	function(Backbone, ControlsTemplate, events_bus, CalEvent) {
+define(['backbone','text!templates/controls.dust', 'models/event'], 
+	function(Backbone, ControlsTemplate, CalEvent) {
   var ControlsView = Backbone.View.extend({
       el: '#controls',
       initialize: function() {
@@ -14,12 +13,8 @@ define(['backbone','text!templates/controls.dust', 'events_bus', 'models/event']
       },
       createEvent: function() {
         // add in validation to check if all fields are filled out
-        cal_event = new CalEvent(this.newAttributes());
-        console.log(cal_event.toJSON());
-        this.collection.add(cal_event); // change to .create once the ReST API side is programmed
-        console.log(JSON.stringify(this.collection.toJSON()));
+        this.collection.create(this.newAttributes());
         this.render(); // change this to just clear value of inputs?
-        events_bus.trigger('test');
       },
       // need validation
       newAttributes: function() {
@@ -40,7 +35,7 @@ define(['backbone','text!templates/controls.dust', 'events_bus', 'models/event']
       },
       render: function() {
       	var dustContext = {
-	        // don't need any model instance data here yet...can add later
+	        // don't need any model instance data here yet...can add later if needed
       	};
 	      var self = this;
 	      dust.render("ctrl_tmpl", dustContext, function(err, out){

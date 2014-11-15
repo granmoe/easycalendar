@@ -5,9 +5,8 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var fs = require('fs'); // prob won't need this anymore, moved to db_ops.js
 var dbhelper = require('./dbhelper.js');
-var db = new dbhelper('events_dev.json'); // database file
+var db = new dbhelper('events_prod.json'); // database file
 
 var app = express();
 
@@ -15,7 +14,7 @@ var app = express();
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded()); // {extended: true} ?
+app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('env', 'development');
@@ -43,26 +42,13 @@ if (app.get('env') === 'development') {
     });
 }
 
-/* ReST API
-    routes
-        /api/appts/:appt_id
-
-create → POST   /collection
-read → GET   /collection[/id]
-update → PUT   /collection/id
-patch → PATCH   /collection/id
-delete → DELETE   /collection/id */
-
-// use regex to not respond to any routes except / and /api ???
-// need to handle invalid params passed to API
-// GET: '/api/:year/:month'
+// ReST API
 
 // db.getMonthEvents(options) - options = {year: 2014, month: 12, app_init: false}
+// could also program PUT, POST, DELETE etc
 
 app.get('/api/events', function (req, res) {
   db.getMonthEvents({app_init: true}, function(data){ // NEED ERROR HANDLING HERE...
-      console.log("events data: \n");
-      console.dir(data);
       res.json(data);
   });
 });

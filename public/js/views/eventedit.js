@@ -2,8 +2,6 @@ define(['underscore', 'backbone', 'text!templates/eventedit.dust', 'events_bus']
 	function(_, Backbone, EventEditTemplate, events_bus) {
   var EventView = Backbone.View.extend({
       el: $("#event-edit-dialog"),
-      // tagName: 'div',
-      // className: 'event-edit-dialog',
       initialize: function() {
       	var compiled = dust.compile(EventEditTemplate, "eventedit_tmpl");
       	dust.loadSource(compiled);
@@ -53,6 +51,7 @@ define(['underscore', 'backbone', 'text!templates/eventedit.dust', 'events_bus']
         this.endTime = parts[1];
       },
       // need to unattach listeners every time view is cleared, otherwise it continues listening to each model
+      // could probably refactor/consolidate the repeated logic here
       doneEditing: function () {
         this.undelegateEvents();
         events_bus.trigger('doneEditing');

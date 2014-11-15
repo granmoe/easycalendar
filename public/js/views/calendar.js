@@ -33,14 +33,8 @@ define([
       
       // re-render based on initial data fetched since month/year must be dependent on this per project specs
       this.listenTo(this.collection, 'firstFetch', this.setDate);
-      this.listenTo(events_bus, 'test', this.test);
       this.listenTo(this.collection, 'add', this.createEventView);
     },
-
-    test: function() {
-      console.log("TESTETSTETESTESTESTESTET");
-    },
-
     // fetch the full month's data when calendar is initially loaded or changed to diff month
     callFetch: function(year,month){
       if (year && month) {
@@ -76,10 +70,9 @@ define([
     },
     createEventView: function(ev) {
       var elem = "#day_" + ev.get('day');
-      console.log("elem: " + elem);
       var view = new EventView({model: ev});
       view.render();
-      $(elem).append(view.el); // why does this remove other content in the elem? Look at Backbone source
+      $(elem).append(view.el);
     },
     render: function() {
       var dustContext = {

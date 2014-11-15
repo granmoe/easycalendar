@@ -14,9 +14,6 @@ define([
 			time: '',
 			day: '',
 			address: ''
-		},
-		toggleEdit: function() {
-			this.editing = !this.editing;
 		}
   });
   return EventModel;

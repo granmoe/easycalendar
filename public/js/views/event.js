@@ -1,7 +1,6 @@
 define(['underscore', 'backbone', 'text!templates/event.dust', 'views/eventedit', 'events_bus'], 
 	function(_, Backbone, EventTemplate, EventEditView, events_bus) {
   var EventView = Backbone.View.extend({
-      // el passed into constructor in calendar view as '#day_' + day number
       tagName: 'li',
       className: 'calendar-event',
       initialize: function() {
@@ -29,8 +28,7 @@ define(['underscore', 'backbone', 'text!templates/event.dust', 'views/eventedit'
 	        if (err) {
 	          console.log(err);
 	        } else {
-	          self.el.innerHTML = out; // this may overwrite content that already exists in the element
-                                    // even though we're using append in the parent view
+	          self.el.innerHTML = out;
             return self;
 	        }
 	      });

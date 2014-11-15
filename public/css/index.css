@@ -1,6 +1,7 @@
 /* TODO: 
-change a lot of this stuff to use bootstrap approach 
+change a lot of this stuff to use more of the bootstrap approach 
 overflow in ol
+position of prev/next month should be constant, annoying to have to chase the buttons
 */
 
 * {
@@ -31,12 +32,13 @@ body > div {
 	width: 14.2857142857%;
 	height: 90px;
 }
+#header h1 {
+	padding: 8px;
+	width: 400px;
+}
 #header-day-names .col-md-1 {
 	height: 40px;
 	text-align: center;
-}
-#calendar ol {
-	//overflow: scroll;
 }
 #calendar ol li {
 	list-style-type: none;
@@ -46,29 +48,18 @@ body > div {
 	color: blue; /* plain color names are lame */
 }
 .editing {
-	color: red;
+	color: red; /* but that's ok */
 }
 #header button, #header h1 {
 	display: inline;
 }
-#controls {
-	padding: 8px;
+#controls, #event-edit-dialog {
+	padding: 16px;
 	background-color: #B5C669;
-	min-height: 300px;
 	width: 300px;
 	left: 928px;
 }
-#controls * {
+#controls *, #event-edit-dialog *  {
 	margin-bottom: 6px;
 	display: block;
-}
-#event-edit-dialog {
-	position: fixed;
-	background-color: #B5C669;
-	width: 300px;
-	left: 928px;
-}
-#event-edit-dialog * {
-	display: block;
-	margin-bottom: 2px;
 }
