@@ -15,6 +15,12 @@ Usage
 Use the sidebar to create new events. Click events to edit or delete them. Hover over events to see their details in the sidebar.
 
 
+Issues
+======
+
+Please submit issues on this Github repository: https://github.com/granmoe/easycalendar
+
+
 Known Issues
 ============
 
