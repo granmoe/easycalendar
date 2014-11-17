@@ -1,0 +1,5 @@
+# no .MD files (maintain on github only)
+*.MD
+
+# no .~ temp files
+*~

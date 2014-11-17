@@ -1,13 +1,10 @@
 define([
+	'underscore',
   'backbone'
-  ], function(Backbone){
+  ], function(_, Backbone){
 
 	var EventModel = Backbone.Model.extend({
-		initialize: function() {
-			this.editing = false;
-		},
 		defaults: {
-			id: '',
 			month: '',
 			year: '',
 			title: '',

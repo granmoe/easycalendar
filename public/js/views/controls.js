@@ -7,6 +7,7 @@ define(['backbone','text!templates/controls.dust', 'models/event'],
       initialize: function() {
       	var compiled = dust.compile(ControlsTemplate, "ctrl_tmpl");
       	dust.loadSource(compiled);
+        this.render();
       },
       events: {
         "click #create-event-btn" : 'createEvent'
@@ -14,7 +15,7 @@ define(['backbone','text!templates/controls.dust', 'models/event'],
       createEvent: function() {
         // add in validation to check if all fields are filled out
         this.collection.create(this.newAttributes());
-        this.render(); // change this to just clear value of inputs?
+        this.render();
       },
       // need validation
       newAttributes: function() {
@@ -28,8 +29,7 @@ define(['backbone','text!templates/controls.dust', 'models/event'],
           time: $('#ev-beg-time').val().trim() + " - " + $("#ev-end-time").val().trim(),
           day: $("#ev-day").val().trim(),
           year: $("#header h1").text().split(' ')[1],
-          month: currMonth,
-          id: '',
+          month: currMonth.toString(),
           address: $("#ev-address").val().trim()
         };
       },

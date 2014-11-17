@@ -33,7 +33,7 @@ define([
       
       // re-render based on initial data fetched since month/year must be dependent on this per project specs
       this.listenTo(this.collection, 'firstFetch', this.setDate);
-      this.listenTo(this.collection, 'add', this.createEventView);
+      this.listenTo(this.collection, 'add', this.createEventView);      
     },
     // fetch the full month's data when calendar is initially loaded or changed to diff month
     callFetch: function(year,month){
@@ -69,6 +69,7 @@ define([
       }
     },
     createEventView: function(ev) {
+      console.log("createEventView called in CalendarView");
       var elem = "#day_" + ev.get('day');
       var view = new EventView({model: ev});
       view.render();

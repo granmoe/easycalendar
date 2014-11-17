@@ -30,13 +30,11 @@ require(
     Backbone.origSync = Backbone.sync;
     Backbone.customSync = function(method, model, option) {
         if (method == 'read') return Backbone.origSync(method, model, option);
-        console.log(method + ' method called for model: "' + JSON.stringify(model) + '"');
+        console.log(method + ' method called for model: ' + JSON.stringify(model));
     }
     Backbone.sync = Backbone.customSync;
 
     // init the views
     var calendarView = new CalendarView({collection: EventsCollection});
     var controlsView = new ControlsView({collection: EventsCollection});
-    controlsView.render();
-    // calendarview has to be rendered in itself, dependent on data
 });
